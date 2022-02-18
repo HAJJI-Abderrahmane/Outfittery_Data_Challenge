@@ -1,0 +1,5 @@
+py7zr
+beautifulsoup4
+pandas
+lxml
+sqlalchemy
