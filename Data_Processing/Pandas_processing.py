@@ -36,7 +36,7 @@ if __name__ == "__main__":
 	##Cleaning & Transforming the data
 	#all of the posts were scrapped with their tags, so first things first removing all html tags from the "Body" column
 	dfposts.Body = dfposts.Body.apply(lambda x: body_transformation(x))
-	#There are some rows with NaN values in OwnerUserId in Posts that need to be removed, as well as convert them from 
+	#There are some rows with NaN values in OwnerUserId in Posts that needs to be removed, as well as convert them from 
 	#float to int as float takes more space and its pointless to have them as float since IDs are integers.
 	dfposts = dfposts[dfposts.OwnerUserId.notna()]
 	dfposts.OwnerUserId = dfposts.OwnerUserId.astype(int)
@@ -51,7 +51,7 @@ if __name__ == "__main__":
 	logger.info(f"Starting processing sequence")
 	#Iterate over each User to create new needed columns
 	for _,row in dfusers.iterrows():
-		logger.info(f"Processing User (Id:{row.id})")
+		logger.info(f"Processing User (Id:{row.Id})")
 		#Total number of posts created
 		Total_number_posts = dfposts[dfposts.OwnerUserId==float(row.Id)].shape[0]
 
@@ -70,7 +70,7 @@ if __name__ == "__main__":
 		Total_number_posts_list.append(Total_number_posts)
 		creation_date_list.append(creation_date)
 		Number_posts_120days_list.append(Number_posts_120days)
-		logger.info(f"Finished Processing User (Id:{row.id})")
+		logger.info(f"Finished Processing User (Id:{row.Id})")
 	#Creating new columns
 	dfusers["Total_number_of_posts_created"] = Total_number_posts_list
 	dfusers["Creation_date_of_the_last_post"] = creation_date_list

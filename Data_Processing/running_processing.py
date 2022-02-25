@@ -7,6 +7,8 @@ import re,sys
 from sqlalchemy import create_engine
 import logging
 
+from tqdm import tqdm
+
 def cleantags(x):
 	#Using Regex to remove the tags and everything in between
 	reg = re.compile('<.*?>') 
@@ -54,7 +56,7 @@ if __name__ == "__main__":
 
 	logger.info(f"Starting processing sequence")
 	#Iterate over each User to create new needed columns
-	for _,row in dfusers.iterrows():
+	for _,row in tqdm(dfusers.iterrows()):
 		logger.info(f"Processing User (Id:{row.Id})")
 		#Total number of posts created
 		Total_number_posts = dfposts[dfposts.OwnerUserId==float(row.Id)].shape[0]
